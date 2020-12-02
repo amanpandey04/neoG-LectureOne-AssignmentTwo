@@ -136,22 +136,18 @@ for (let i = 0; i < questions.length; i++) {
   play(currentQuestion.question, currentQuestion.answer)
 }
 
-// highscore conditional loop
-if (score > highScore[2].score) {
-  console.log(chalk.bold.bgYellow(`Genius, Billionaire, Playboy, Philanthropist. You've beaten a highscore. Your score is: ${score} `));
-} else {
-  console.log(chalk.bold.bgYellow(`Your total score is: ${score}
-Do you wanna try again?`));
-}
-
-console.log("\n================\n")
-
-console.log("Below are the highscores of other players. If you've beaten it, send me the screenshot.\n")
-
-// loop for displaying highscores
+// loop for beating highscores
 for (let i = 0; i < highScore.length; i++) {
   currentHighScore = highScore[i];
-  console.log(chalk.bold.green(currentHighScore.name, currentHighScore.score));
+
+  if (score >= currentHighScore.score) {
+    console.log(chalk.bold.green(`Genius, Billionaire, Playboy, Philanthropist. You've beaten ${currentHighScore.name}'s score! Send me the screenshot.
+YOUR FINAL SCORE IS: ${score}`));
+    break;
+  } else if (score < currentHighScore.score) {
+    console.log(chalk.bold.green(`YOUR FINAL SCORE IS: ${score}`));
+    break;
+  }
 }
 
 console.log("\n================\n")
